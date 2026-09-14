@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서비스 소개 & 원리 | Pixel Studio Web - 무서버 웹 이미지 편집기</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col p-6 sm:p-12 antialiased">
+  <main class="max-w-3xl mx-auto w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8 flex-1">
+    <a href="index.html" class="inline-flex items-center gap-2 text-rose-400 font-bold hover:underline text-sm">
+      <i class="fa-solid fa-arrow-left"></i> 이미지 편집기로 돌아가기
+    </a>
+    
+    <div class="space-y-3">
+      <h1 class="text-2xl sm:text-3xl font-black text-white">🎨 PicsArt 대안! 워터마크 없는 무서버 웹 이미지 편집기</h1>
+      <p class="text-sm text-slate-400 leading-relaxed">구독 강제도, 저장 워터마크도 없습니다. 브라우저에서 100% 로컬 캔버스 연산으로 즉시 보정하세요.</p>
+    </div>
+
+    <section class="space-y-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-6">
+      <h2 class="text-lg font-bold text-rose-400">1. 왜 Pixel Studio Web인가요?</h2>
+      <p>기존 모바일/웹 사진 편집기(PicsArt, Photoshop Express 등)는 간단한 밝기 조정이나 필터 하나 적용하는 데도 비싼 월 구독을 요구하거나 의도치 않은 자동 결제를 유도합니다.</p>
+      <p><strong>Pixel Studio Web</strong>은 필수적인 사진 보정(노출·대비·채도·색온도·필터·회전·크롭·텍스트 스탬프)을 <strong>워터마크 0개</strong>, <strong>회원가입 0초</strong>로 완전 무료 제공합니다.</p>
+    </section>
+
+    <section class="space-y-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-6">
+      <h2 class="text-lg font-bold text-rose-400">2. 100% 브라우저 메모리 연산 (Zero-Upload)</h2>
+      <p>사용자가 불러온 사진은 외부 서버로 1바이트도 전송되지 않습니다. 모든 픽셀 데이터는 브라우저 내부 HTML5 Canvas 메모리에서만 연산되고 저장 즉시 메모리에서 파기됩니다.</p>
+      <ul class="list-disc list-inside space-y-1 text-slate-400">
+        <li>개인 사생활 사진 외부 유출 위험 원천 차단</li>
+        <li>트래픽 대역폭 0MB — 대용량 고해상도 이미지도 초고속 보정</li>
+        <li>JPG, PNG, WebP 무손실/고품질 다운로드 지원</li>
+      </ul>
+    </section>
+
+    <div class="pt-6 border-t border-slate-800 flex justify-between items-center text-xs text-slate-500">
+      <span>© 2026 Pixel Studio Web. Zero-Server Client-Side Architecture.</span>
+      <a href="privacy.html" class="text-rose-400 hover:underline">개인정보처리방침 →</a>
+    </div>
+  </main>
+</body>
+</html>

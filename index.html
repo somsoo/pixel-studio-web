@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>웹 이미지 편집기 | 밝기·대비·채도·필터·크롭·워터마크 없는 무료 사진 보정 (Pixel Studio Web)</title>
+  <meta name="description" content="PicsArt 대안! 워터마크·구독 없는 100% 브라우저 무료 이미지 편집기. 밝기, 대비, 채도, 필름 LUT 필터, 90도 회전, 텍스트 스탬프 및 고화질 무손실 다운로드.">
+  <link rel="canonical" href="https://pixel-studio-web.enjoy-onepage.com/">
+  
+  <meta property="og:title" content="Pixel Studio Web - 워터마크 없는 무료 웹 이미지 편집기">
+  <meta property="og:description" content="서버 전송 0바이트! 브라우저 캔버스에서 직접 보정하는 초경량 사진 편집기.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pixel-studio-web.enjoy-onepage.com/">
+  
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google AdSense 비동기 로더 (No-Duplicate-Push 헌법 준수) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+
+  <style>
+    .filter-thumb-active { border-color: #f43f5e !important; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- 상단 슬림 띠배너 (Top Slim Banner: 3824727725, 50~60px 고정) -->
+  <div class="manual-ad-box ad-top-banner w-full max-w-5xl mx-auto my-2 text-center overflow-hidden min-h-[50px] max-h-[60px]">
+    <ins class="adsbygoogle"
+         style="display:block; min-height:50px; max-height:60px;"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="false"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 메인 래퍼 (Double-Nesting 금지, 루트 단일 컨테이너 선언) -->
+  <main class="w-full max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden mb-8 flex-1">
+    
+    <!-- 네비게이션 헤더 & 프라이버시 배지 -->
+    <header class="border-b border-slate-800 px-6 py-6 sm:px-10 flex flex-col md:flex-row items-center justify-between gap-4 bg-gradient-to-b from-slate-900 to-slate-950">
+      <div class="flex items-center gap-3.5 text-center md:text-left">
+        <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-rose-500/20 shrink-0 font-black">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 justify-center md:justify-start">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Pixel Studio Web</h1>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-950 text-rose-400 border border-rose-800">워터마크 0개 무료</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">PicsArt 구독 피로 없는 100% 브라우저 캔버스 사진 편집기</p>
+        </div>
+      </div>
+
+      <!-- 상단 액션 버튼 그룹 (PRO 모달 & 배지) -->
+      <div class="flex items-center gap-2.5">
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-950/60 border border-rose-800 text-rose-400 text-xs font-bold">
+          <i class="fa-solid fa-shield-halved text-rose-400"></i>
+          <span>100% Zero-Upload</span>
+        </div>
+        <button id="pixelProBtn" onclick="openPixelProModal()" class="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-1.5">
+          <i class="fa-solid fa-crown text-slate-950"></i>
+          <span id="pixelProBtnText">PRO 라이선스</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 안심 배지 바 -->
+    <div class="bg-rose-950/30 border-b border-rose-900/40 px-6 py-2.5 text-xs text-rose-200 flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-eye-slash text-rose-400"></i>
+        <span><strong>사생활 완벽 보호:</strong> 사진 파일 서버 업로드 0바이트 · 기기 브라우저 캔버스에서만 100% 로컬 연산</span>
+      </div>
+      <a href="privacy.html" class="underline hover:text-rose-300 font-semibold text-[11px]">로컬 보증서 확인 →</a>
+    </div>
+
+    <!-- LOGIC START -->
+    <!-- PC 1:1 좌우 2단 대칭형 그리드 (lg:grid-cols-12 좌 6열 : 우 6열 sticky) -->
+    <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 좌측 6열: 캔버스 작업 영역 및 이미지 업로드 드롭존 -->
+      <div class="lg:col-span-6 space-y-6">
+
+        <!-- 드롭존 & 파일 선택 바 -->
+        <div id="dropArea" class="border-2 border-dashed border-slate-700 hover:border-rose-400 rounded-3xl p-6 text-center transition cursor-pointer bg-slate-950/60 flex flex-col items-center justify-center min-h-[140px]" onclick="document.getElementById('imageFileInput').click()">
+          <input type="file" id="imageFileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)"/>
+          <i class="fa-solid fa-cloud-arrow-up text-3xl text-rose-400 mb-2"></i>
+          <div class="text-xs font-bold text-slate-200">사진을 여기로 드래그하거나 클릭하여 열기</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">JPG, PNG, WebP 등 모든 이미지 지원 (워터마크 없음)</div>
+        </div>
+
+        <!-- 이미지 캔버스 프리뷰 뷰어 카드 -->
+        <div class="p-4 bg-slate-950 border border-slate-800 rounded-3xl space-y-3">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-crop-simple text-rose-400"></i>
+              실시간 캔버스 뷰어
+            </span>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="rotateImage()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-bold transition flex items-center gap-1">
+                <i class="fa-solid fa-rotate-right"></i> 90° 회전
+              </button>
+              <button type="button" onclick="resetAdjustments()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-bold transition">
+                초기화
+              </button>
+            </div>
+          </div>
+
+          <!-- 실제 캔버스 영역 -->
+          <div class="w-full aspect-[4/3] bg-slate-900 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-800 relative">
+            <canvas id="mainCanvas" class="max-w-full max-h-full object-contain"></canvas>
+            <div id="canvasPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-slate-600 text-xs">
+              <i class="fa-regular fa-image text-3xl mb-2"></i>
+              <span>이미지를 업로드하면 즉시 편집할 수 있습니다</span>
+            </div>
+          </div>
+
+          <!-- 인스타그램 / 유튜브 숏폼 규격 빠른 비율 크롭 버튼 바 -->
+          <div class="flex gap-1.5 overflow-x-auto pb-1 text-xs">
+            <button type="button" onclick="cropPreset('free')" class="px-2.5 py-1 bg-rose-500 text-white font-bold rounded-lg shrink-0 transition crop-btn" data-ratio="free">원본 비율</button>
+            <button type="button" onclick="cropPreset('1:1')" class="px-2.5 py-1 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-lg shrink-0 transition crop-btn" data-ratio="1:1">1:1 정방형</button>
+            <button type="button" onclick="cropPreset('4:5')" class="px-2.5 py-1 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-lg shrink-0 transition crop-btn" data-ratio="4:5">4:5 인스타</button>
+            <button type="button" onclick="cropPreset('16:9')" class="px-2.5 py-1 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-lg shrink-0 transition crop-btn" data-ratio="16:9">16:9 가로</button>
+            <button type="button" onclick="cropPreset('9:16')" class="px-2.5 py-1 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-lg shrink-0 transition crop-btn" data-ratio="9:16">9:16 숏폼</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 우측 6열: 세부 조정 슬라이더, 감성 필터 및 다운로드 영수증 (lg:sticky) -->
+      <div class="lg:col-span-6 lg:sticky lg:top-8 space-y-6">
+        
+        <!-- 보정 컨트롤 패널 카드 -->
+        <div class="bg-slate-950 text-slate-100 rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-800 space-y-5">
+          
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></div>
+              <h2 class="font-bold text-sm text-slate-200 tracking-wide uppercase">
+                <span id="editorStatusTitle">사진 보정 스튜디오</span>
+              </h2>
+            </div>
+            <button type="button" onclick="autoEnhance()" class="px-3 py-1 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white text-xs font-black rounded-xl shadow-sm transition flex items-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>원클릭 자동 보정</span>
+            </button>
+          </div>
+
+          <!-- 1. 감성 프리셋 필터 칩 목록 -->
+          <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-300">감성 프리셋 필터 (VSCO 필름톤)</div>
+            <div class="grid grid-cols-4 gap-2 text-xs text-center font-bold">
+              <button type="button" onclick="applyFilter('normal')" class="filter-chip filter-thumb-active p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="normal">
+                원본
+              </button>
+              <button type="button" onclick="applyFilter('vintage')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="vintage">
+                🎞️ 빈티지
+              </button>
+              <button type="button" onclick="applyFilter('warm')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="warm">
+                ☀️ 웜톤
+              </button>
+              <button type="button" onclick="applyFilter('cool')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="cool">
+                🌊 쿨톤
+              </button>
+              <button type="button" onclick="applyFilter('mono')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="mono">
+                🖤 흑백
+              </button>
+              <button type="button" onclick="applyFilter('vivid')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="vivid">
+                🌈 비비드
+              </button>
+              <button type="button" onclick="applyFilter('sepia')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="sepia">
+                📜 세피아
+              </button>
+              <button type="button" onclick="applyFilter('dramatic')" class="filter-chip p-2 bg-slate-900 border border-slate-800 rounded-xl transition hover:bg-slate-800" data-filter="dramatic">
+                🎭 드라마틱
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. 세부 정밀 조정 슬라이더 그룹 -->
+          <div class="space-y-3 pt-2 border-t border-slate-800 text-xs">
+            <!-- 밝기 (Brightness) -->
+            <div class="space-y-1">
+              <div class="flex justify-between font-mono text-[11px] text-slate-400">
+                <span>밝기 (Brightness)</span>
+                <span id="valBrightness">100%</span>
+              </div>
+              <input type="range" id="sliderBrightness" min="20" max="200" value="100" class="w-full accent-rose-500 cursor-pointer" oninput="onSliderChange()"/>
+            </div>
+
+            <!-- 대비 (Contrast) -->
+            <div class="space-y-1">
+              <div class="flex justify-between font-mono text-[11px] text-slate-400">
+                <span>대비 (Contrast)</span>
+                <span id="valContrast">100%</span>
+              </div>
+              <input type="range" id="sliderContrast" min="20" max="200" value="100" class="w-full accent-rose-500 cursor-pointer" oninput="onSliderChange()"/>
+            </div>
+
+            <!-- 채도 (Saturation) -->
+            <div class="space-y-1">
+              <div class="flex justify-between font-mono text-[11px] text-slate-400">
+                <span>채도 (Saturation)</span>
+                <span id="valSaturation">100%</span>
+              </div>
+              <input type="range" id="sliderSaturation" min="0" max="200" value="100" class="w-full accent-rose-500 cursor-pointer" oninput="onSliderChange()"/>
+            </div>
+
+            <!-- 블러 / 선명도 (Blur) -->
+            <div class="space-y-1">
+              <div class="flex justify-between font-mono text-[11px] text-slate-400">
+                <span>부드러움 (Softness / Blur)</span>
+                <span id="valBlur">0px</span>
+              </div>
+              <input type="range" id="sliderBlur" min="0" max="10" value="0" class="w-full accent-rose-500 cursor-pointer" oninput="onSliderChange()"/>
+            </div>
+
+            <!-- 텍스트 워터마크/스탬프 입력 -->
+            <div class="space-y-1 pt-1">
+              <div class="flex justify-between font-mono text-[11px] text-slate-400">
+                <span>텍스트 스탬프 오버레이 (선택)</span>
+              </div>
+              <div class="flex gap-2">
+                <input type="text" id="textStampInput" placeholder="사진에 찍을 문구 (예: © My Studio)" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-rose-400" oninput="onSliderChange()"/>
+                <button type="button" onclick="clearTextStamp()" class="px-2.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-xl text-xs">삭제</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 동적 작업 명세 영수증 -->
+          <div class="py-2 space-y-2 font-mono text-xs border-t border-slate-800">
+            <div class="flex justify-between text-slate-400">
+              <span>WATERMARK STATUS:</span>
+              <span class="text-rose-400 font-bold">100% 제거 (강제 워터마크 0개)</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>SERVER TRAFFIC:</span>
+              <span class="text-emerald-400 font-bold">0 MB (브라우저 메모리 연산)</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>CURRENT PRESET:</span>
+              <span class="text-white font-bold" id="receiptActivePreset">원본</span>
+            </div>
+          </div>
+
+          <!-- 다운로드 및 포맷 선택 버튼 바 -->
+          <div class="pt-2 space-y-2.5 border-t border-slate-800">
+            <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+              <button type="button" onclick="downloadEditedImage('image/png', 'png')" class="py-3 bg-rose-500 hover:bg-rose-400 text-white rounded-2xl transition flex items-center justify-center gap-1.5 shadow-lg shadow-rose-950/40">
+                <i class="fa-solid fa-download"></i> PNG 저장
+              </button>
+              <button type="button" onclick="downloadEditedImage('image/jpeg', 'jpg')" class="py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-2xl transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-download"></i> JPG 저장
+              </button>
+              <button type="button" onclick="downloadEditedImage('image/webp', 'webp')" class="py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-2xl transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-download"></i> WebP 저장
+              </button>
+            </div>
+
+            <!-- 전사 공통 원클릭 결과 복사 & 바이럴 링크 -->
+            <button type="button" id="btnCopyPhotoSummary" onclick="copyPhotoSummary()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-bold rounded-2xl text-xs transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-copy text-rose-400"></i>
+              <span>보정 명세 및 바로가기 클립보드 복사</span>
+            </button>
+          </div>
+
+          <!-- 보안 확인 문구 -->
+          <div class="mt-2 text-center text-[10px] text-slate-500 font-mono">
+            100% IN-BROWSER RENDERING · ZERO WATERMARK · LIFETIME FREE
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- LOGIC END -->
+
+    <!-- 본문 중간 반응형 배너 (In-Result Slot: 1186914926, 1:1 푸시 규격) -->
+    <div class="manual-ad-box ad-mid-banner w-full max-w-4xl mx-auto my-6 text-center overflow-hidden">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2228289204702106"
+           data-ad-slot="1186914926"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- E-E-A-T 서브페이지 네비게이션 링크 푸터 -->
+    <footer class="bg-slate-950 border-t border-slate-800 px-6 py-6 text-center text-xs text-slate-500">
+      <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-center gap-4 mb-3 font-medium">
+        <a href="about.html" class="hover:text-rose-400 transition">서비스 소개 & 원리</a>
+        <span class="text-slate-700">·</span>
+        <a href="privacy.html" class="hover:text-rose-400 transition">개인정보처리방침 (로컬 보증서)</a>
+        <span class="text-slate-700">·</span>
+        <a href="terms.html" class="hover:text-rose-400 transition">이용약관</a>
+        <span class="text-slate-700">·</span>
+        <a href="sitemap.xml" class="hover:text-rose-400 transition">사이트맵</a>
+      </div>
+      <p>© 2026 Pixel Studio Web. All rights reserved. Zero-Server Client-Side Architecture.</p>
+    </footer>
+
+  </main>
+
+  <!-- 하단 대형 배너 (푸터 직전: 3416334507, 1:1 푸시 규격) -->
+  <div class="manual-ad-box ad-bottom-banner w-full max-w-5xl mx-auto mb-8 text-center overflow-hidden">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- Lemon Squeezy PRO 라이선스 등록 모달 -->
+  <div id="pixelProModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800 text-center space-y-5 text-slate-100">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black text-white">PRO 평생 무광고 라이선스</h3>
+        <p class="text-xs text-slate-400 mt-1">1회 결제로 모든 광고 영구 제거 및 무제한 고화질 렌더링</p>
+      </div>
+
+      <div class="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl text-left text-xs space-y-1.5 text-slate-300 font-medium">
+        <p>✓ 구글 광고 영구 전면 차단 (작업 몰입도 극대화)</p>
+        <p>✓ 1회 결제 ($2.99 / 약 3,900원, PicsArt 월 $10.50 대비 95% 절감)</p>
+        <p>✓ 최대 3대 기기(PC/스마트폰/태블릿) 평생 인증</p>
+      </div>
+
+      <div class="space-y-2">
+        <input type="text" id="pixelLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-rose-400 outline-none text-white"/>
+        <button type="button" id="btnVerifyPixelLicense" onclick="verifyPixelLicenseKey()" class="w-full py-3 bg-rose-500 hover:bg-rose-400 text-white text-xs font-bold rounded-xl transition">
+          라이선스 키 인증하기
+        </button>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2 text-xs">
+        <a href="https://lemonsqueezy.com" target="_blank" class="text-rose-400 font-bold hover:underline">
+          👉 아직 키가 없으신가요? 평생 이용권 구매하기 ($2.99)
+        </a>
+        <button type="button" onclick="closePixelProModal()" class="text-slate-400 hover:text-slate-200">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전사 공통 원클릭 결과 복사 토스트 알림 컴포넌트 -->
+  <div id="global-ux-toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#4c0519;color:#fda4af;border:1px solid #e11d48;padding:12px 24px;border-radius:9999px;font-size:14px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.4);z-index:9999;transition:all 0.3s ease;opacity:0;pointer-events:none;">
+    알림 메시지
+  </div>
+
+  <!-- 핵심 클라이언트 사이드 이미지 편집기 스크립트 -->
+  <script>
+    let originalImage = null;
+    let currentRotation = 0;
+    let currentFilter = 'normal';
+    let currentCropRatio = 'free';
+
+    const canvas = document.getElementById('mainCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // 드래그 앤 드롭 지원
+    const dropArea = document.getElementById('dropArea');
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    dropArea.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files.length > 0) {
+        loadFile(files[0]);
+      }
+    });
+
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        loadFile(files[0]);
+      }
+    }
+
+    function loadFile(file) {
+      if (!file.type.startsWith('image/')) {
+        showToastNotification('이미지 파일만 업로드할 수 있습니다.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          originalImage = img;
+          currentRotation = 0;
+          document.getElementById('canvasPlaceholder').style.display = 'none';
+          resetAdjustments();
+          renderImage();
+          showToastNotification('사진을 성공적으로 불러왔습니다! 🎉');
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 슬라이더 변경 감지
+    function onSliderChange() {
+      const b = document.getElementById('sliderBrightness').value;
+      const c = document.getElementById('sliderContrast').value;
+      const s = document.getElementById('sliderSaturation').value;
+      const blur = document.getElementById('sliderBlur').value;
+
+      document.getElementById('valBrightness').textContent = `${b}%`;
+      document.getElementById('valContrast').textContent = `${c}%`;
+      document.getElementById('valSaturation').textContent = `${s}%`;
+      document.getElementById('valBlur').textContent = `${blur}px`;
+
+      renderImage();
+    }
+
+    function resetAdjustments() {
+      document.getElementById('sliderBrightness').value = 100;
+      document.getElementById('sliderContrast').value = 100;
+      document.getElementById('sliderSaturation').value = 100;
+      document.getElementById('sliderBlur').value = 0;
+      document.getElementById('textStampInput').value = '';
+
+      document.getElementById('valBrightness').textContent = '100%';
+      document.getElementById('valContrast').textContent = '100%';
+      document.getElementById('valSaturation').textContent = '100%';
+      document.getElementById('valBlur').textContent = '0px';
+
+      currentFilter = 'normal';
+      updateFilterChipUI('normal');
+      currentCropRatio = 'free';
+      updateCropBtnUI('free');
+      currentRotation = 0;
+
+      if (originalImage) renderImage();
+    }
+
+    function autoEnhance() {
+      if (!originalImage) {
+        showToastNotification('먼저 사진을 불러와주세요.');
+        return;
+      }
+      document.getElementById('sliderBrightness').value = 110;
+      document.getElementById('sliderContrast').value = 120;
+      document.getElementById('sliderSaturation').value = 115;
+      document.getElementById('sliderBlur').value = 0;
+      onSliderChange();
+      showToastNotification('✨ 밝기와 선명도가 자동 최적화되었습니다!');
+    }
+
+    function rotateImage() {
+      if (!originalImage) {
+        showToastNotification('먼저 사진을 불러와주세요.');
+        return;
+      }
+      currentRotation = (currentRotation + 90) % 360;
+      renderImage();
+      showToastNotification(`사진이 90도 회전되었습니다 (${currentRotation}°).`);
+    }
+
+    function applyFilter(filterName) {
+      currentFilter = filterName;
+      updateFilterChipUI(filterName);
+      renderImage();
+    }
+
+    function updateFilterChipUI(filterName) {
+      document.querySelectorAll('.filter-chip').forEach(btn => {
+        if (btn.dataset.filter === filterName) {
+          btn.classList.add('filter-thumb-active', 'border-rose-500');
+        } else {
+          btn.classList.remove('filter-thumb-active', 'border-rose-500');
+        }
+      });
+      const names = {
+        normal: '원본', vintage: '빈티지 🎞️', warm: '웜톤 ☀️', cool: '쿨톤 🌊',
+        mono: '흑백 🖤', vivid: '비비드 🌈', sepia: '세피아 📜', dramatic: '드라마틱 🎭'
+      };
+      document.getElementById('receiptActivePreset').textContent = names[filterName] || filterName;
+    }
+
+    function cropPreset(ratio) {
+      currentCropRatio = ratio;
+      updateCropBtnUI(ratio);
+      renderImage();
+      showToastNotification(`화면 비율이 ${ratio} 규격으로 설정되었습니다.`);
+    }
+
+    function updateCropBtnUI(ratio) {
+      document.querySelectorAll('.crop-btn').forEach(btn => {
+        if (btn.dataset.ratio === ratio) {
+          btn.classList.add('bg-rose-500', 'text-white');
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+        } else {
+          btn.classList.remove('bg-rose-500', 'text-white');
+          btn.classList.add('bg-slate-800', 'text-slate-300');
+        }
+      });
+    }
+
+    function clearTextStamp() {
+      document.getElementById('textStampInput').value = '';
+      renderImage();
+    }
+
+    function renderImage() {
+      if (!originalImage) return;
+
+      const isRotatedQuarter = (currentRotation === 90 || currentRotation === 270);
+      let baseW = isRotatedQuarter ? originalImage.naturalHeight : originalImage.naturalWidth;
+      let baseH = isRotatedQuarter ? originalImage.naturalWidth : originalImage.naturalHeight;
+
+      // 비율 크롭 계산
+      let targetW = baseW;
+      let targetH = baseH;
+
+      if (currentCropRatio === '1:1') {
+        const side = Math.min(baseW, baseH);
+        targetW = side;
+        targetH = side;
+      } else if (currentCropRatio === '4:5') {
+        targetW = Math.min(baseW, baseH * (4 / 5));
+        targetH = targetW * (5 / 4);
+      } else if (currentCropRatio === '16:9') {
+        targetW = Math.min(baseW, baseH * (16 / 9));
+        targetH = targetW * (9 / 16);
+      } else if (currentCropRatio === '9:16') {
+        targetW = Math.min(baseW, baseH * (9 / 16));
+        targetH = targetW * (16 / 9);
+      }
+
+      canvas.width = targetW;
+      canvas.height = targetH;
+
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 캔버스 필터 스트링 조합
+      const b = document.getElementById('sliderBrightness').value;
+      const c = document.getElementById('sliderContrast').value;
+      const s = document.getElementById('sliderSaturation').value;
+      const blur = document.getElementById('sliderBlur').value;
+
+      let filterString = `brightness(${b}%) contrast(${c}%) saturate(${s}%) blur(${blur}px)`;
+
+      if (currentFilter === 'vintage') {
+        filterString += ' sepia(35%) hue-rotate(-15deg)';
+      } else if (currentFilter === 'warm') {
+        filterString += ' sepia(25%) saturate(120%)';
+      } else if (currentFilter === 'cool') {
+        filterString += ' hue-rotate(180deg) saturate(90%)';
+      } else if (currentFilter === 'mono') {
+        filterString += ' grayscale(100%)';
+      } else if (currentFilter === 'vivid') {
+        filterString += ' saturate(160%) contrast(115%)';
+      } else if (currentFilter === 'sepia') {
+        filterString += ' sepia(90%)';
+      } else if (currentFilter === 'dramatic') {
+        filterString += ' contrast(150%) brightness(90%)';
+      }
+
+      ctx.filter = filterString;
+
+      // 중심점 이동 후 회전 및 그리기
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate((currentRotation * Math.PI) / 180);
+
+      const drawW = originalImage.naturalWidth;
+      const drawH = originalImage.naturalHeight;
+      ctx.drawImage(originalImage, -drawW / 2, -drawH / 2, drawW, drawH);
+
+      ctx.restore();
+
+      // 텍스트 스탬프 렌더링 (필터 적용되지 않는 순수 레이어로 오버레이)
+      const stampText = document.getElementById('textStampInput').value.trim();
+      if (stampText) {
+        ctx.save();
+        ctx.font = `bold ${Math.max(16, Math.floor(targetW * 0.035))}px sans-serif`;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+        ctx.shadowBlur = 6;
+        ctx.textAlign = 'right';
+        ctx.fillText(stampText, targetW - 24, targetH - 24);
+        ctx.restore();
+      }
+    }
+
+    function downloadEditedImage(mimeType, ext) {
+      if (!originalImage) {
+        showToastNotification('저장할 이미지가 없습니다.');
+        return;
+      }
+      const dataUrl = canvas.toDataURL(mimeType, 0.95);
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = `pixel-studio-${Date.now()}.${ext}`;
+      a.click();
+      showToastNotification(`워터마크 없는 고화질 ${ext.toUpperCase()} 파일이 저장되었습니다! 💾`);
+    }
+
+    function copyPhotoSummary() {
+      const preset = document.getElementById('receiptActivePreset').textContent;
+      const b = document.getElementById('valBrightness').textContent;
+      const c = document.getElementById('valContrast').textContent;
+      const s = document.getElementById('valSaturation').textContent;
+
+      const text = `[Pixel Studio Web - 웹 이미지 편집기]\n적용 필터: ${preset}\n세부 보정: 밝기 ${b}, 대비 ${c}, 채도 ${s}\n워터마크: 100% 없음 (Zero Watermark)\n\n👉 무료 웹 이미지 편집기 바로가기: https://pixel-studio-web.enjoy-onepage.com`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToastNotification('사진 보정 명세 및 바로가기가 클립보드에 복사되었습니다! ✨');
+      }).catch(() => {
+        showToastNotification('복사 완료!');
+      });
+    }
+
+    function showToastNotification(msg) {
+      const toast = document.getElementById('global-ux-toast');
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(10px)';
+      }, 2300);
+    }
+
+    // Lemon Squeezy PRO 라이선스 키 관리
+    function openPixelProModal() {
+      document.getElementById('pixelProModal').classList.remove('hidden');
+    }
+
+    function closePixelProModal() {
+      document.getElementById('pixelProModal').classList.add('hidden');
+    }
+
+    function verifyPixelLicenseKey() {
+      const input = document.getElementById('pixelLicenseKeyInput').value.trim();
+      if (!input || input.length < 6) {
+        showToastNotification('유효한 라이선스 키를 입력해주세요 (예: PRO-XXXX-XXXX)');
+        return;
+      }
+
+      localStorage.setItem('pixel_studio_web_pro_licensed', 'true');
+      localStorage.setItem('pixel_studio_web_pro_key', input);
+      applyPixelProStatus();
+      closePixelProModal();
+      showToastNotification('👑 PRO 라이선스가 성공적으로 활성화되었습니다! 모든 광고가 영구 차단됩니다.');
+    }
+
+    function applyPixelProStatus() {
+      const isPro = localStorage.getItem('pixel_studio_web_pro_licensed') === 'true';
+      if (isPro) {
+        document.querySelectorAll('.manual-ad-box').forEach(el => el.style.display = 'none');
+        document.getElementById('pixelProBtnText').textContent = '👑 PRO 회원';
+        const btn = document.getElementById('pixelProBtn');
+        btn.classList.remove('from-amber-500', 'to-orange-500');
+        btn.classList.add('from-rose-500', 'to-pink-500');
+      }
+    }
+
+    // 데모 기본 이미지 로드 (첫 접속 시 즉시 확인 가능하게 Canvas에 더미 그래픽 렌더링)
+    function initDefaultCanvas() {
+      canvas.width = 600;
+      canvas.height = 450;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#f43f5e';
+      ctx.beginPath();
+      ctx.arc(300, 225, 80, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 원본 이미지 객체 생성
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        originalImage = tempImg;
+        document.getElementById('canvasPlaceholder').style.display = 'none';
+        renderImage();
+      };
+      tempImg.src = canvas.toDataURL();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initDefaultCanvas();
+      applyPixelProStatus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pixel-studio-web.enjoy-onepage.com/sitemap.xml
