@@ -2,6 +2,11 @@
 
 <html lang="ko">
 <head>
+    <!-- Performance Optimization: Resource Preconnect -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>웹 이미지 편집기 | 밝기·대비·채도·필터·크롭·워터마크 없는 무료 사진 보정 (Pixel Studio Web)</title>
@@ -19,7 +24,18 @@
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106"></script>
 <style>
     .filter-thumb-active { border-color: #f43f5e !important; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
-  </style>
+  
+        /* U3 Accessibility: Global Keyboard Focus Ring Standard */
+        :focus-visible {
+            outline: 2px solid #3b82f6 !important;
+            outline-offset: 2px !important;
+        }
+        input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+            outline: 2px solid #2563eb !important;
+            outline-offset: 1px !important;
+        }
+    
+    </style>
 <style id="layout-shield">
   html, body {
     max-width: 100%;
@@ -141,7 +157,7 @@
 <div class="lg:col-span-6 space-y-6">
 <!-- 드롭존 & 파일 선택 바 -->
 <div class="border-2 border-dashed border-slate-700 hover:border-rose-400 rounded-3xl p-6 text-center transition cursor-pointer bg-slate-950/60 flex flex-col items-center justify-center min-h-[140px]" id="dropArea" onclick="document.getElementById('imageFileInput').click()">
-<input accept="image/*" class="hidden" id="imageFileInput" onchange="handleFileSelect(event)" type="file"/>
+<input accept="image/*" class="hidden" id="imageFileInput" onchange="handleFileSelect(event)" type="file" aria-label="Imagefileinput" />
 <i class="fa-solid fa-cloud-arrow-up text-3xl text-rose-400 mb-2"></i>
 <div class="text-xs font-bold text-slate-200">사진을 여기로 드래그하거나 클릭하여 열기</div>
 <div class="text-[11px] text-slate-500 mt-0.5">JPG, PNG, WebP 등 모든 이미지 지원 (워터마크 없음)</div>
@@ -234,7 +250,7 @@
 <span>밝기 (Brightness)</span>
 <span id="valBrightness">100%</span>
 </div>
-<input class="w-full accent-rose-500 cursor-pointer" id="sliderBrightness" max="200" min="20" oninput="onSliderChange()" type="range" value="100"/>
+<input class="w-full accent-rose-500 cursor-pointer" id="sliderBrightness" max="200" min="20" oninput="onSliderChange()" type="range" value="100" aria-label="Sliderbrightness" />
 </div>
 <!-- 대비 (Contrast) -->
 <div class="space-y-1">
@@ -242,7 +258,7 @@
 <span>대비 (Contrast)</span>
 <span id="valContrast">100%</span>
 </div>
-<input class="w-full accent-rose-500 cursor-pointer" id="sliderContrast" max="200" min="20" oninput="onSliderChange()" type="range" value="100"/>
+<input class="w-full accent-rose-500 cursor-pointer" id="sliderContrast" max="200" min="20" oninput="onSliderChange()" type="range" value="100" aria-label="Slidercontrast" />
 </div>
 <!-- 채도 (Saturation) -->
 <div class="space-y-1">
@@ -250,7 +266,7 @@
 <span>채도 (Saturation)</span>
 <span id="valSaturation">100%</span>
 </div>
-<input class="w-full accent-rose-500 cursor-pointer" id="sliderSaturation" max="200" min="0" oninput="onSliderChange()" type="range" value="100"/>
+<input class="w-full accent-rose-500 cursor-pointer" id="sliderSaturation" max="200" min="0" oninput="onSliderChange()" type="range" value="100" aria-label="Slidersaturation" />
 </div>
 <!-- 블러 / 선명도 (Blur) -->
 <div class="space-y-1">
@@ -258,7 +274,7 @@
 <span>부드러움 (Softness / Blur)</span>
 <span id="valBlur">0px</span>
 </div>
-<input class="w-full accent-rose-500 cursor-pointer" id="sliderBlur" max="10" min="0" oninput="onSliderChange()" type="range" value="0"/>
+<input class="w-full accent-rose-500 cursor-pointer" id="sliderBlur" max="10" min="0" oninput="onSliderChange()" type="range" value="0" aria-label="Sliderblur" />
 </div>
 <!-- 텍스트 워터마크/스탬프 입력 -->
 <div class="space-y-1 pt-1">
@@ -266,7 +282,7 @@
 <span>텍스트 스탬프 오버레이 (선택)</span>
 </div>
 <div class="flex gap-2">
-<input class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-rose-400" id="textStampInput" oninput="onSliderChange()" placeholder="사진에 찍을 문구 (예: © My Studio)" type="text"/>
+<input class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-rose-400" id="textStampInput" oninput="onSliderChange()" placeholder="사진에 찍을 문구 (예: © My Studio)" type="text" aria-label="사진에 찍을 문구 (예: © My Studio)" />
 <button class="px-2.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-xl text-xs" onclick="clearTextStamp()" type="button">삭제</button>
 </div>
 </div>
@@ -442,7 +458,7 @@
 <p>✓ 최대 3대 기기(PC/스마트폰/태블릿) 평생 인증</p>
 </div>
 <div class="space-y-2">
-<input class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-rose-400 outline-none text-white" id="pixelLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" type="text"/>
+<input class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-center uppercase focus:ring-2 focus:ring-rose-400 outline-none text-white" id="pixelLicenseKeyInput" placeholder="라이선스 키 입력 (예: PRO-XXXX-XXXX)" type="text" aria-label="라이선스 키 입력 (예: PRO-XXXX-XXXX)" />
 <button class="w-full py-3 bg-rose-500 hover:bg-rose-400 text-white text-xs font-bold rounded-xl transition" id="btnVerifyPixelLicense" onclick="verifyPixelLicenseKey()" type="button">
           라이선스 키 인증하기
         </button>
