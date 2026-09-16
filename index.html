@@ -41,20 +41,56 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "웹 이미지 편집기 | 밝기·대비·채도·필터·크롭·워터마크 없는 무료 사진 보정 (Pixel Studio Web)",
-  "url": "https://pixel-studio-web.enjoy-onepage.com/",
-  "description": "PicsArt 대안! 워터마크·구독 없는 100% 브라우저 무료 이미지 편집기. 밝기, 대비, 채도, 필름 LUT 필터, 90도 회전, 텍스트 스탬프 및 고화질 무손실 다운로드.",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires JavaScript. Requires HTML5.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "KRW"
-  }
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://pixel-studio-web.enjoy-onepage.com/#webapp",
+      "name": "Pixel Studio Web",
+      "url": "https://pixel-studio-web.enjoy-onepage.com/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "description": "PicsArt 대안! 워터마크·구독 없는 100% 브라우저 무료 이미지 편집기. 밝기, 대비, 채도, 필름 LUT 필터, 90도 회전, 텍스트 스탬프 및 고화질 무손실 다운로드.",
+      "image": "https://pixel-studio-web.enjoy-onepage.com/og-image.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pixel-studio-web.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "스마트폰으로 찍은 사진을 올리면 화질이 깨지나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "사진의 원본 해상도(Resolution)를 그대로 유지한 상태에서 필터 효과만 적용되므로 원본 화질이 손실되지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "인스타그램 피드용 1:1 정사각형 비율로 자를 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "프리셋에서 '1:1 정사각', '4:5 인스타 피드', '16:9 스토리' 등 맞춤 비율을 원클릭으로 선택해 자를 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "보정 작업을 처음 상태로 되돌리려면 어떻게 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "하단의 '초기화' 버튼을 누르면 필터와 조절 슬라이더가 초기 원본 상태로 즉시 복원됩니다."
+          }
+        }
+      ]
+    }
+  ]
 }
-</script>
+  </script>
 <meta content="https://pixel-studio-web.enjoy-onepage.com/og-image.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Pixel Studio Web - 워터마크 없는 무료 웹 이미지 편집기" name="twitter:title"/><meta content="서버 전송 0바이트! 브라우저 캔버스에서 직접 보정하는 초경량 사진 편집기." name="twitter:description"/><meta content="https://pixel-studio-web.enjoy-onepage.com/og-image.png" name="twitter:image"/></head>
 <body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col font-sans">
 <!-- 상단 슬림 띠배너 (Top Slim Banner: 3824727725, 50~60px 고정) -->
