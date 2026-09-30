@@ -1,43 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서비스 소개 & 원리 | Pixel Studio Web - 무서버 웹 이미지 편집기</title>
-  <style>/* site styles: compiled Tailwind 3.4.17 for this page (replaces the CDN, 2026-09-30) */*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mx-auto{margin-left:auto;margin-right:auto}.flex{display:flex}.inline-flex{display:inline-flex}.min-h-screen{min-height:100vh}.w-full{width:100%}.max-w-3xl{max-width:48rem}.flex-1{flex:1 1 0%}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-2{gap:.5rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-8>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem*var(--tw-space-y-reverse))}.rounded-3xl{border-radius:1.5rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59/var(--tw-border-opacity,1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42/var(--tw-bg-opacity,1))}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23/var(--tw-bg-opacity,1))}.p-6{padding:1.5rem}.p-8{padding:2rem}.pt-6{padding-top:1.5rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.leading-relaxed{line-height:1.625}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.hover\:underline:hover{text-decoration-line:underline}@media (min-width:640px){.sm\:p-12{padding:3rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}}</style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>소개 | Pixel Studio Web</title>
+<meta name="description" content="이 도구가 무엇을 하는지 짧게 소개합니다.">
+<link rel="canonical" href="https://pixel-studio-web.enjoy-onepage.com/about.html">
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{--ink:#0f172a;--muted:#475569;--accent:#1d4ed8;--line:#e2e8f0;--bg:#f8fafc}
+*{box-sizing:border-box}
+body{margin:0;padding:20px 14px;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",Roboto,sans-serif;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere}
+.container{max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px 26px}
+h1{font-size:1.4rem;margin:0 0 10px}
+p{font-size:.95rem;color:#334155}
+.back{display:inline-block;margin-top:18px;padding:10px 16px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col p-6 sm:p-12 antialiased">
-  <main class="max-w-3xl mx-auto w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8 flex-1">
-    <a href="index.html" class="inline-flex items-center gap-2 text-rose-400 font-bold hover:underline text-sm">
-      <i class="fa-solid fa-arrow-left"></i> 이미지 편집기로 돌아가기
-    </a>
-    
-    <div class="space-y-3">
-      <h1 class="text-2xl sm:text-3xl font-black text-white">🎨 PicsArt 대안! 워터마크 없는 무서버 웹 이미지 편집기</h1>
-      <p class="text-sm text-slate-400 leading-relaxed">구독 강제도, 저장 워터마크도 없습니다. 브라우저에서 100% 로컬 캔버스 연산으로 즉시 보정하세요.</p>
-    </div>
-
-    <section class="space-y-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-6">
-      <h2 class="text-lg font-bold text-rose-400">1. 왜 Pixel Studio Web인가요?</h2>
-      <p>기존 모바일/웹 사진 편집기(PicsArt, Photoshop Express 등)는 간단한 밝기 조정이나 필터 하나 적용하는 데도 비싼 월 구독을 요구하거나 의도치 않은 자동 결제를 유도합니다.</p>
-      <p><strong>Pixel Studio Web</strong>은 필수적인 사진 보정(노출·대비·채도·색온도·필터·회전·크롭·텍스트 스탬프)을 <strong>워터마크 0개</strong>, <strong>회원가입 0초</strong>로 완전 무료 제공합니다.</p>
-    </section>
-
-    <section class="space-y-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-6">
-      <h2 class="text-lg font-bold text-rose-400">2. 100% 브라우저 메모리 연산 (Zero-Upload)</h2>
-      <p>사용자가 불러온 사진은 외부 서버로 1바이트도 전송되지 않습니다. 모든 픽셀 데이터는 브라우저 내부 HTML5 Canvas 메모리에서만 연산되고 저장 즉시 메모리에서 파기됩니다.</p>
-      <ul class="list-disc list-inside space-y-1 text-slate-400">
-        <li>개인 사생활 사진 외부 유출 위험 원천 차단</li>
-        <li>트래픽 대역폭 0MB — 대용량 고해상도 이미지도 초고속 보정</li>
-        <li>JPG, PNG, WebP 무손실/고품질 다운로드 지원</li>
-      </ul>
-    </section>
-
-    <div class="pt-6 border-t border-slate-800 flex justify-between items-center text-xs text-slate-500">
-      <span>© 2026 Pixel Studio Web. Zero-Server Client-Side Architecture.</span>
-      <a href="privacy.html" class="text-rose-400 hover:underline">개인정보처리방침 →</a>
-    </div>
-  </main>
+<body>
+<div class="container">
+  <h1>Pixel Studio Web 소개</h1>
+  <p>사진의 밝기·대비·채도를 조절하고, 필터를 입히고, 회전하거나 정해진 비율로 자를 수 있는 무료 이미지 편집기입니다. 결과는 PNG·JPG·WebP로 저장합니다.</p>
+  <p>저장한 이미지에 워터마크를 넣지 않으며, 사진은 이 브라우저 안에서만 처리합니다.</p>
+  <a class="back" href="/">← 도구로 돌아가기</a>
+</div>
 </body>
 </html>
